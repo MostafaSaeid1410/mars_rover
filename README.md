@@ -1,31 +1,35 @@
 # Mars Rover
 
-Mars Rover
-Problem Description
-You are part of the team that explores Mars by sending remotely controlled vehicles to the surface of the planet. This project aims to develop an API that translates the commands sent from Earth to instructions understood by the rover.
+The Mars Rover project simulates remotely controlled vehicles exploring the surface of Mars. It includes an API to translate commands sent from Earth into instructions understood by the rover.
 
-Approach
-This project is approached as any real-world requirement that would be shipped as part of a real product. It showcases how a problem is decomposed into smaller pieces and tackled systematically.
+- Problem Description
+  When the rover lands on Mars, it is initialized with its current coordinates and the direction it is facing. Commands sent to the rover include moving forward, moving backward, rotating left, and rotating right. The rover must report its final coordinates and heading after executing a series of commands.
 
-Part I: Command Execution
-The rover is initialized with its current coordinates and direction upon touchdown on Mars. It is then given a command string, which is broken down into individual commands and executed. The valid commands include:
+- Approach
+  The problem is tackled by decomposing it into smaller pieces. The project is divided into three parts:
 
-F: Move forward on the current heading.
-B: Move backward on the current heading.
-L: Rotate left by 90 degrees.
-R: Rotate right by 90 degrees.
-Example
-An example command might be FLFFFRFLB. Once the full command string has been followed, the rover reports its current coordinates and heading.
+Executing individual commands.
+Handling obstacles to avoid collisions.
+Calculating a command string to safely move the rover to a given coordinate, avoiding obstacles.
+Getting Started
+Follow these steps to start using the Mars Rover application:
 
-Part II: Obstacle Detection
-Previous missions have faced obstacles that caused damage to the rover. This part deals with detecting and avoiding obstacles. Obstacle coordinates are provided, and when the rover encounters an obstacle, it stops at the coordinate immediately before and reports its position, heading, and the fact that it stopped due to collision.
+- Clone the Repository:
 
-Part III: Safe Navigation
-Given the rover's current position and heading, plus the known obstacles, this part calculates a command string for the rover that will safely move it to a given coordinate while avoiding all obstacles.
+bash
+Copy code
+git clone
+Navigate to the Project Directory:
 
-Usage
-To use the Mars Rover API, follow these steps:
+bash
+Copy code
+cd mars-rover
+Install Dependencies:
 
-- Initialize the rover with its starting coordinates and direction.
-- Provide a command string for the rover to execute.
-- Handle obstacle detection and safe navigation as required.
+bash
+npm install
+Run Unit Tests:
+
+bash
+npm test
+This command will execute the unit tests to ensure that the Mars Rover application functions as expected.
