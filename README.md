@@ -1,4 +1,4 @@
-# rover_mars
+# Mars Rover
 
 Mars Rover
 Problem Description
