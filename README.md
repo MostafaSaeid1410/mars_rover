@@ -28,7 +28,7 @@ Navigate to the Project Directory:
 
 bash
 Copy code
-cd mars-rover
+cd mars_rover
 Install Dependencies:
 
 bash
