@@ -1,8 +1,6 @@
-// Import the Rover class
 const Rover = require("../src/rover");
 
 describe("Rover", () => {
-  // Define obstacles
   const obstacles = [
     [1, 4],
     [3, 5],
@@ -32,18 +30,24 @@ describe("Rover", () => {
       rover.moveForward();
       expect(rover.x).toBe(4);
       expect(rover.y).toBe(3);
+      expect(rover.direction).toBe("NORTH");
     });
-
-    // Add similar tests for moving forward in other directions
 
     test("should move backward correctly facing EAST", () => {
       const rover = new Rover(4, 2, "EAST", obstacles);
       rover.moveBackward();
       expect(rover.x).toBe(3);
       expect(rover.y).toBe(2);
+      expect(rover.direction).toBe("EAST");
     });
 
-    // Add similar tests for moving backward in other directions
+    test("should move backward correctly facing NORTH", () => {
+      const rover = new Rover(4, 2, "NORTH", obstacles);
+      rover.moveBackward();
+      expect(rover.x).toBe(4);
+      expect(rover.y).toBe(1);
+      expect(rover.direction).toBe("NORTH");
+    });
   });
 
   describe("Rotation", () => {
@@ -59,7 +63,17 @@ describe("Rover", () => {
       expect(rover.direction).toBe("EAST");
     });
 
-    // Add similar tests for rotating left from other directions
+    test("should rotate left correctly from WEST", () => {
+      const rover = new Rover(4, 2, "WEST", obstacles);
+      rover.rotateLeft();
+      expect(rover.direction).toBe("SOUTH");
+    });
+
+    test("should rotate left correctly from NORTH", () => {
+      const rover = new Rover(4, 2, "NORTH", obstacles);
+      rover.rotateLeft();
+      expect(rover.direction).toBe("WEST");
+    });
 
     test("should rotate right correctly from EAST", () => {
       const rover = new Rover(4, 2, "EAST", obstacles);
@@ -67,13 +81,23 @@ describe("Rover", () => {
       expect(rover.direction).toBe("SOUTH");
     });
 
+    test("should rotate right correctly from SOUTH", () => {
+      const rover = new Rover(4, 2, "SOUTH", obstacles);
+      rover.rotateRight();
+      expect(rover.direction).toBe("WEST");
+    });
+
+    test("should rotate right correctly from WEST", () => {
+      const rover = new Rover(4, 2, "WEST", obstacles);
+      rover.rotateRight();
+      expect(rover.direction).toBe("NORTH");
+    });
+
     test("should rotate right correctly from NORTH", () => {
       const rover = new Rover(4, 2, "NORTH", obstacles);
       rover.rotateRight();
       expect(rover.direction).toBe("EAST");
     });
-
-    // Add similar tests for rotating right from other directions
   });
 
   describe("Command Execution", () => {
@@ -92,6 +116,7 @@ describe("Rover", () => {
       rover.moveForward();
       expect(rover.x).toBe(3);
       expect(rover.y).toBe(4);
+      expect(rover.direction).toBe("NORTH");
     });
 
     test("should handle collision with obstacles when moving backward", () => {
@@ -99,6 +124,7 @@ describe("Rover", () => {
       rover.moveBackward();
       expect(rover.x).toBe(3);
       expect(rover.y).toBe(3);
+      expect(rover.direction).toBe("NORTH");
     });
   });
 });

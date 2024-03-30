@@ -4,56 +4,42 @@ class Rover {
     this.y = y;
     this.direction = direction;
     this.obstacles = obstacles;
+    this.moveActions = {
+      NORTH: [0, 1],
+      EAST: [1, 0],
+      SOUTH: [0, -1],
+      WEST: [-1, 0],
+    };
+    this.rotateActions = {
+      NORTH: { L: "WEST", R: "EAST" },
+      EAST: { L: "NORTH", R: "SOUTH" },
+      SOUTH: { L: "EAST", R: "WEST" },
+      WEST: { L: "SOUTH", R: "NORTH" },
+    };
   }
 
   moveForward() {
-    let nextX = this.x;
-    let nextY = this.y;
-
-    switch (this.direction) {
-      case "NORTH":
-        nextY++;
-        break;
-      case "EAST":
-        nextX++;
-        break;
-      case "SOUTH":
-        nextY--;
-        break;
-      case "WEST":
-        nextX--;
-        break;
-    }
-
-    if (this.isObstacle(nextX, nextY)) {
-      console.log(
-        `Stopped due to collision at (${this.x}, ${this.y}) ${this.direction}`,
-      );
-      return;
-    }
-
-    this.x = nextX;
-    this.y = nextY;
+    this.move("F");
   }
 
   moveBackward() {
-    let nextX = this.x;
-    let nextY = this.y;
+    this.move("B");
+  }
 
-    switch (this.direction) {
-      case "NORTH":
-        nextY--;
-        break;
-      case "EAST":
-        nextX--;
-        break;
-      case "SOUTH":
-        nextY++;
-        break;
-      case "WEST":
-        nextX++;
-        break;
-    }
+  rotateLeft() {
+    this.rotate("L");
+  }
+
+  rotateRight() {
+    this.rotate("R");
+  }
+
+  move(command) {
+    let action = this.moveActions[this.direction];
+    let multiplier = command === "B" ? -1 : 1;
+    let [dx, dy] = action;
+    let nextX = this.x + dx * multiplier;
+    let nextY = this.y + dy * multiplier;
 
     if (this.isObstacle(nextX, nextY)) {
       console.log(
@@ -66,59 +52,26 @@ class Rover {
     this.y = nextY;
   }
 
-  rotateLeft() {
-    switch (this.direction) {
-      case "NORTH":
-        this.direction = "WEST";
-        break;
-      case "EAST":
-        this.direction = "NORTH";
-        break;
-      case "SOUTH":
-        this.direction = "EAST";
-        break;
-      case "WEST":
-        this.direction = "SOUTH";
-        break;
-    }
-  }
-
-  rotateRight() {
-    switch (this.direction) {
-      case "NORTH":
-        this.direction = "EAST";
-        break;
-      case "EAST":
-        this.direction = "SOUTH";
-        break;
-      case "SOUTH":
-        this.direction = "WEST";
-        break;
-      case "WEST":
-        this.direction = "NORTH";
-        break;
-    }
+  rotate(command) {
+    this.direction = this.rotateActions[this.direction][command];
   }
 
   executeCommands(commands) {
+    const commandMap = {
+      F: this.moveForward.bind(this),
+      B: this.moveBackward.bind(this),
+      L: this.rotateLeft.bind(this),
+      R: this.rotateRight.bind(this),
+    };
+
     for (let command of commands) {
-      switch (command) {
-        case "F":
-          this.moveForward();
-          break;
-        case "B":
-          this.moveBackward();
-          break;
-        case "L":
-          this.rotateLeft();
-          break;
-        case "R":
-          this.rotateRight();
-          break;
-        default:
-          console.log(`Invalid command: ${command}`);
+      if (commandMap[command]) {
+        commandMap[command]();
+      } else {
+        console.log(`Invalid command: ${command}`);
       }
     }
+
     console.log(`Final position: (${this.x}, ${this.y}) ${this.direction}`);
   }
 
