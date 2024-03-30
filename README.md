@@ -26,6 +26,6 @@ Given the rover's current position and heading, plus the known obstacles, this p
 Usage
 To use the Mars Rover API, follow these steps:
 
-1-Initialize the rover with its starting coordinates and direction.
-2-Provide a command string for the rover to execute.
-3-Handle obstacle detection and safe navigation as required.
+- Initialize the rover with its starting coordinates and direction.
+- Provide a command string for the rover to execute.
+- Handle obstacle detection and safe navigation as required.
