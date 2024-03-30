@@ -1,0 +1,25 @@
+{
+  "name": "mars_rover",
+  "version": "1.0.0",
+  "description": "Penta-b Mars Rover Task",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostafaSaeid1410/mars_rover.git"
+  },
+  "keywords": [
+    "Penta-b"
+  ],
+  "author": "Mostafa Saeid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MostafaSaeid1410/mars_rover/issues"
+  },
+  "homepage": "https://github.com/MostafaSaeid1410/mars_rover#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
