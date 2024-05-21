@@ -17,14 +17,14 @@ class Rover {
       WEST: { L: "SOUTH", R: "NORTH" },
     };
   }
-
-  moveForward() {
-    this.move("F");
-  }
-
+  
   moveBackward() {
     this.move("B");
   }
+  
+    moveForward() {
+      this.move("F");
+    }
 
   rotateLeft() {
     this.rotate("L");
